@@ -2156,7 +2156,7 @@ ConnectionsManager['auto_parry'] = RunService.Heartbeat:Connect(function()
     end
 
 
-    local ping_threshold = math.clamp(Player.Entity.properties.ping / 10, 15, 20)
+    local ping_threshold = math.clamp(Player.Entity.properties.ping / 10, 10, 18)
     local ping_thresholds = math.clamp(Player.Entity.properties.ping / 10, 10, 18)
 
     local player_properties = Player.Entity.properties
