@@ -2106,7 +2106,7 @@ end)
 
 
 
-ConnectionsManager['auto_parry'] = RunService.Heartbeat:Connect(function() 
+ConnectionsManager['auto_parry'] = RunService.Heartbeat:Connect(function(dt) 
     local auto_parry_enabled = Config.auto_parry
            
     if not auto_parry_enabled then
