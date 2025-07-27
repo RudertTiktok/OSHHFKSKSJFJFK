@@ -992,11 +992,8 @@ ConnectionsManager['controller'] = RunService.Heartbeat:Connect(function()
     end
 end)
 
-local function linear_predict(a: any, b: any, time_volume: any)    
-    local t = math.min(math.max(time_volume, 0), 1)
-    if a == b then return a end
-    local result = a + (b - a) * t
-    return math.max(math.min(result, math.max(a, b)), math.min(a, b))
+local function linear_predict(a: any, b: any, time_volume: number)
+    return a + (b - a) * time_volume
 end
 
 function World:get_pointer()
@@ -1764,7 +1761,7 @@ function AutoParry:is_spam()
     if ball_properties.lerp_radians then       
         local curve_threshold = 0.028 + (player_ping / 100) 
         if ball_properties.lerp_radians > curve_threshold then
-            if self.parries >= 7 then
+            if self.parries >= 6 then
                 self.parries = 1
             end
             return false
@@ -1785,7 +1782,7 @@ function AutoParry:is_spam()
         return false
     end
 
-    if self.speed < 27 then
+    if self.speed < 30 then
         self.parries = 1
         return false
     end
@@ -2106,7 +2103,7 @@ end)
 
 
 
-ConnectionsManager['auto_parry'] = RunService.Heartbeat:Connect(function(dt) 
+RunService.Heartbeat:Connect(function() 
     local auto_parry_enabled = Config.auto_parry
            
     if not auto_parry_enabled then
@@ -2179,8 +2176,8 @@ ConnectionsManager['auto_parry'] = RunService.Heartbeat:Connect(function(dt)
     end
 
     -- Adjusted ranges with lighter delta time scaling
-    ball_properties.spam_range = (ping_thresholds + ball_properties.speed) * 1.26 / 3.14 * dt * 30     
-    ball_properties.parry_range = (ping_threshold + ball_properties.speed) * 2 / math.pi * dt * 30
+    ball_properties.spam_range = (ping_thresholds + ball_properties.speed) * 1.26 / 3.14    
+    ball_properties.parry_range = (ping_threshold + ball_properties.speed) * 2 / math.pi
 
     if Player.Entity.properties.sword == 'Titan Blade' then
         ball_properties.parry_range += 11
