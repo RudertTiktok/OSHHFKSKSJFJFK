@@ -2106,7 +2106,7 @@ end)
 
 
 
-ConnectionsManager['auto_parry'] = RunService.Heartbeat:Connect(function()
+ConnectionsManager['auto_parry'] = RunService.Heartbeat:Connect(function() 
     local auto_parry_enabled = Config.auto_parry
            
     if not auto_parry_enabled then
@@ -2142,30 +2142,29 @@ ConnectionsManager['auto_parry'] = RunService.Heartbeat:Connect(function()
     ball_properties.is_curved = AutoParry.is_curved()
     ball_properties.is_curveds = AutoParry.is_curveds()
     
-    
     if AutoParry.entity_properties.distance and AutoParry.entity_properties.distance >= 5 and AutoParry.entity_properties.distance <= 7 then
         ball_properties.is_curved = false
         ball_properties.is_curveds = false
     end
 
-    
     if Singularity_Cape then
         AutoParry.ball.properties.auto_spam = false
         AutoParry.ball.properties.parries = 0
         return 
     end
 
-
     local ping_threshold = math.clamp(Player.Entity.properties.ping / 10, 10, 18)
     local ping_thresholds = math.clamp(Player.Entity.properties.ping / 10, 10, 18)
 
     local player_properties = Player.Entity.properties
     
+    -- Adjusted moveAmount with a lighter delta time scaling to prevent early parries
     local baseMoveAmount = 0.5
-    local moveAmount = baseMoveAmount * (1 / (AutoParry.entity_properties.distance + 0.01)) * 1000
+    local moveAmount = baseMoveAmount * (1 / (AutoParry.entity_properties.distance + 0.01)) * 1000 * dt * 30 -- Scaled for ~30 FPS baseline
 
-    local spam_accuracity = math.min(moveAmount + (ball_properties.maximum_speed / 8.4), (150 + moveAmount))
-    local parry_accuracity = (ping_thresholds + ball_properties.maximum_speed) * 1.55 / 11.2 + ping_threshold
+    -- Adjusted accuracy calculations with minimal delta time scaling
+    local spam_accuracity = math.min(moveAmount + (ball_properties.maximum_speed / 8.4), (150 + moveAmount)) -- Removed dt scaling
+    local parry_accuracity = (ping_thresholds + ball_properties.maximum_speed) * 1.55 / 11.2 + ping_threshold -- Removed dt scaling
 
     if player_properties.is_moving then
         parry_accuracity *= 1.1       
@@ -2179,8 +2178,9 @@ ConnectionsManager['auto_parry'] = RunService.Heartbeat:Connect(function()
         parry_accuracity = parry_accuracity * (1 + (Player.Entity.properties.ping / 500))
     end
 
-    ball_properties.spam_range = (ping_thresholds + ball_properties.speed) * 1.26 / 3.14     
-    ball_properties.parry_range = (ping_threshold + ball_properties.speed) * 2 / math.pi
+    -- Adjusted ranges with lighter delta time scaling
+    ball_properties.spam_range = (ping_thresholds + ball_properties.speed) * 1.26 / 3.14 * dt * 30     
+    ball_properties.parry_range = (ping_threshold + ball_properties.speed) * 2 / math.pi * dt * 30
 
     if Player.Entity.properties.sword == 'Titan Blade' then
         ball_properties.parry_range += 11
@@ -2306,14 +2306,15 @@ ConnectionsManager['auto_parry'] = RunService.Heartbeat:Connect(function()
     task.spawn(function() AutoParry:PerformParry() end) 
     
     task.spawn(function()
-        repeat
-            RunService.PreSimulation:Wait(0)
-        until 
-            (tick() - ball_properties.last_hit) > (1 - math.clamp(ping_threshold / 100, 0.1, 0.7))
+		repeat
+			RunService.PreSimulation:Wait(0)
+		until 
+			(tick() - ball_properties.last_hit) > 1 - (ping_threshold / 100)
 
-        ball_properties.cooldown = false
-    end)
+		ball_properties.cooldown = false
+	end)
 end)
+
 
 
 local LocalPlayer = Players.LocalPlayer
