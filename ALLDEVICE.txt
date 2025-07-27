@@ -2160,11 +2160,11 @@ ConnectionsManager['auto_parry'] = RunService.Heartbeat:Connect(function()
     
     -- Adjusted moveAmount with a lighter delta time scaling to prevent early parries
     local baseMoveAmount = 0.5
-    local moveAmount = baseMoveAmount * (1 / (AutoParry.entity_properties.distance + 0.01)) * 1000 * dt * 30 -- Scaled for ~30 FPS baseline
+    local moveAmount = baseMoveAmount * (1 / (AutoParry.entity_properties.distance + 0.01)) * 1000
 
     -- Adjusted accuracy calculations with minimal delta time scaling
-    local spam_accuracity = math.min(moveAmount + (ball_properties.maximum_speed / 8.4), (150 + moveAmount)) -- Removed dt scaling
-    local parry_accuracity = (ping_thresholds + ball_properties.maximum_speed) * 1.55 / 11.2 + ping_threshold -- Removed dt scaling
+    local spam_accuracity = math.min(moveAmount + (ball_properties.maximum_speed / 8.4), (150 + moveAmount))
+    local parry_accuracity = (ping_thresholds + ball_properties.maximum_speed) * 1.55 / 11.2 + ping_threshold
 
     if player_properties.is_moving then
         parry_accuracity *= 1.1       
