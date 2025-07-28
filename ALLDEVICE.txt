@@ -1208,53 +1208,53 @@ function AutoParry:ParryData()
     local directionMap = {
         ["Linear"] = function()
             local target_pos = AutoParry.entity_properties.server_position or Vector3.zero
-            return CFrame.new(LocalPlayer.Character.PrimaryPart.Position, target_pos + Vector3.new(math.random(-200, 200), math.random(-100, 100), math.random(-200, 200)))
+            return CFrame.new(LocalPlayer.Character.PrimaryPart.Position, target_pos + Vector3.new(math.random(-100, 100), math.random(-50, 50), math.random(-100, 100)))
         end,
         ["Backwards"] = function()
-            return CFrame.new(Camera.CFrame.Position, Camera.CFrame.Position - (Camera.CFrame.LookVector * 10000) + Vector3.new(math.random(-300, 300), math.random(500, 1500), math.random(-300, 300)))
+            return CFrame.new(Camera.CFrame.Position, Camera.CFrame.Position - (Camera.CFrame.LookVector * 100000) + Vector3.new(math.random(-100, 100), math.random(1000, 2000), math.random(-100, 100)))
         end,
         ["Random"] = function()
-            return CFrame.new(LocalPlayer.Character.PrimaryPart.Position, Vector3.new(math.random(-2000, 2000), math.random(-1000, 1000), math.random(-2000, 2000)))
+            return CFrame.new(LocalPlayer.Character.PrimaryPart.Position, Vector3.new(math.random(-10000, 10000), math.random(-5000, 5000), math.random(-10000, 10000)))
         end,
         ["Accelerated"] = function()
             local target_pos = AutoParry.entity_properties.server_position or Vector3.zero
-            return CFrame.new(LocalPlayer.Character.PrimaryPart.Position, target_pos + Vector3.new(math.random(-150, 150), math.random(100, 300), math.random(-150, 150)))
+            return CFrame.new(LocalPlayer.Character.PrimaryPart.Position, target_pos + Vector3.new(math.random(-50, 50), math.random(200, 400), math.random(-50, 50)))
         end,
         ["Right"] = function()
-            return CFrame.new(Camera.CFrame.Position, Camera.CFrame.Position + (Camera.CFrame.RightVector * 10000) + Vector3.new(math.random(500, 1500), math.random(-200, 200), math.random(-200, 200)))
+            return CFrame.new(Camera.CFrame.Position, Camera.CFrame.Position + (Camera.CFrame.RightVector * 100000) + Vector3.new(math.random(1000, 2000), math.random(-100, 100), math.random(-100, 100)))
         end,
         ["Left"] = function()
-            return CFrame.new(Camera.CFrame.Position, Camera.CFrame.Position - (Camera.CFrame.RightVector * 10000) + Vector3.new(math.random(-1500, -500), math.random(-200, 200), math.random(-200, 200)))
+            return CFrame.new(Camera.CFrame.Position, Camera.CFrame.Position - (Camera.CFrame.RightVector * 100000) + Vector3.new(math.random(-2000, -1000), math.random(-100, 100), math.random(-100, 100)))
         end,
         ["LeftSharp"] = function()
-            return CFrame.new(Camera.CFrame.Position, Camera.CFrame.Position - (Camera.CFrame.RightVector * 15000) + Vector3.new(math.random(-2000, -1000), math.random(-100, 100), math.random(-100, 100)))
+            return CFrame.new(Camera.CFrame.Position, Camera.CFrame.Position - (Camera.CFrame.RightVector * 150000) + Vector3.new(math.random(-3000, -1500), math.random(-50, 50), math.random(-50, 50)))
         end,
         ["LeftSemiSharp"] = function()
-            return CFrame.new(Camera.CFrame.Position, Camera.CFrame.Position - (Camera.CFrame.RightVector * 8000) + Vector3.new(math.random(-1000, -300), math.random(-150, 150), math.random(-150, 150)))
+            return CFrame.new(Camera.CFrame.Position, Camera.CFrame.Position - (Camera.CFrame.RightVector * 80000) + Vector3.new(math.random(-1500, -500), math.random(-50, 50), math.random(-50, 50)))
         end,
         ["Up"] = function()
-            return CFrame.new(Camera.CFrame.Position, Camera.CFrame.Position + (Camera.CFrame.UpVector * 10000) + Vector3.new(math.random(-200, 200), math.random(500, 1500), math.random(-200, 200)))
+            return CFrame.new(Camera.CFrame.Position, Camera.CFrame.Position + (Camera.CFrame.UpVector * 100000) + Vector3.new(math.random(-100, 100), math.random(1000, 2000), math.random(-100, 100)))
         end,
         ["Down"] = function()
-            return CFrame.new(Camera.CFrame.Position, Camera.CFrame.Position - (Camera.CFrame.UpVector * 10000) + Vector3.new(math.random(-200, 200), math.random(-1500, -500), math.random(-200, 200)))
+            return CFrame.new(Camera.CFrame.Position, Camera.CFrame.Position - (Camera.CFrame.UpVector * 100000) + Vector3.new(math.random(-100, 100), math.random(-2000, -1000), math.random(-100, 100)))
         end,
         ["Normal"] = function()
             return Camera.CFrame
         end,
         ["FollowCamera"] = function()
-            return CFrame.new(LocalPlayer.Character.PrimaryPart.Position, Camera.CFrame.Position + Camera.CFrame.LookVector * 10000 + Vector3.new(math.random(-300, 300), math.random(-200, 200), math.random(-300, 300)))
+            return CFrame.new(LocalPlayer.Character.PrimaryPart.Position, Camera.CFrame.Position + Camera.CFrame.LookVector * 100000 + Vector3.new(math.random(-100, 100), math.random(-100, 100), math.random(-100, 100)))
         end,
         ["Forward"] = function()
-            return CFrame.new(LocalPlayer.Character.PrimaryPart.Position, LocalPlayer.Character.PrimaryPart.Position + LocalPlayer.Character.PrimaryPart.CFrame.LookVector * 10000 + Vector3.new(math.random(-200, 200), math.random(-200, 200), math.random(-200, 200)))
+            return CFrame.new(LocalPlayer.Character.PrimaryPart.Position, LocalPlayer.Character.PrimaryPart.Position + LocalPlayer.Character.PrimaryPart.CFrame.LookVector * 100000 + Vector3.new(math.random(-100, 100), math.random(-100, 100), math.random(-100, 100)))
         end,
         ["Circular"] = function()
             local angle = math.rad(math.random(0, 360))
-            local offset = Vector3.new(math.cos(angle) * 1500, math.sin(angle) * 750, math.random(-750, 750))
+            local offset = Vector3.new(math.cos(angle) * 10000, math.sin(angle) * 5000, math.random(-5000, 5000))
             local target_pos = AutoParry.entity_properties.server_position or Vector3.zero
             return CFrame.new(LocalPlayer.Character.PrimaryPart.Position, target_pos + offset)
         end,
         ["Default"] = function()
-            return Camera.CFrame * CFrame.new(math.random(-100, 100), math.random(-100, 100), math.random(-100, 100))
+            return Camera.CFrame * CFrame.new(math.random(-50, 50), math.random(-50, 50), math.random(-50, 50))
         end
     }
 
@@ -1268,8 +1268,6 @@ function AutoParry:ExecuteParry()
         Parry_Remote:FireServer(Hash, Parry_Key, table.unpack(VicoX))          
     end)
 end
-
-local FirstParryDone = false
 
 function AutoParry:PerformParry()    
     local ball_properties = AutoParry.ball.properties
@@ -1296,34 +1294,34 @@ function AutoParry:PerformParry()
 
         local current_curve = Config.curve_method
         if current_curve == "Linear" then
-            direction = CFrame.new(LocalPlayer.Character.PrimaryPart.Position, target_position + Vector3.new(math.random(-200, 200), math.random(-100, 100), math.random(-200, 200)))
+            direction = CFrame.new(LocalPlayer.Character.PrimaryPart.Position, target_position + Vector3.new(math.random(-100, 100), math.random(-50, 50), math.random(-100, 100)))
         elseif current_curve == "Backwards" then
-            direction = CFrame.new(camera_position, camera_position + (-camera.CFrame.LookVector * 50000) + Vector3.new(math.random(-300, 300), math.random(500, 1500), math.random(-300, 300)))
+            direction = CFrame.new(camera_position, camera_position + (-camera.CFrame.LookVector * 100000) + Vector3.new(math.random(-100, 100), math.random(1000, 2000), math.random(-100, 100)))
         elseif current_curve == "Random" then
-            direction = CFrame.new(LocalPlayer.Character.PrimaryPart.Position, Vector3.new(math.random(-5000, 5000), math.random(-1000, 1000), math.random(-5000, 5000)))
+            direction = CFrame.new(LocalPlayer.Character.PrimaryPart.Position, Vector3.new(math.random(-10000, 10000), math.random(-5000, 5000), math.random(-10000, 10000)))
         elseif current_curve == "Accelerated" then
-            direction = CFrame.new(LocalPlayer.Character.PrimaryPart.Position, target_position + Vector3.new(math.random(-150, 150), math.random(100, 300), math.random(-150, 150)))
+            direction = CFrame.new(LocalPlayer.Character.PrimaryPart.Position, target_position + Vector3.new(math.random(-50, 50), math.random(200, 400), math.random(-50, 50)))
         elseif current_curve == "Right" then
-            direction = CFrame.new(camera_position, camera_position + (camera.CFrame.RightVector * 50000) + Vector3.new(math.random(500, 1500), math.random(-200, 200), math.random(-200, 200)))
+            direction = CFrame.new(camera_position, camera_position + (camera.CFrame.RightVector * 100000) + Vector3.new(math.random(1000, 2000), math.random(-100, 100), math.random(-100, 100)))
         elseif current_curve == "Left" then
-            direction = CFrame.new(camera_position, camera_position + (-camera.CFrame.RightVector * 50000) + Vector3.new(math.random(-1500, -500), math.random(-200, 200), math.random(-200, 200)))
+            direction = CFrame.new(camera_position, camera_position + (-camera.CFrame.RightVector * 100000) + Vector3.new(math.random(-2000, -1000), math.random(-100, 100), math.random(-100, 100)))
         elseif current_curve == "LeftSharp" then
-            direction = CFrame.new(camera_position, camera_position + (-camera.CFrame.RightVector * 75000) + Vector3.new(math.random(-2000, -1000), math.random(-100, 100), math.random(-100, 100)))
+            direction = CFrame.new(camera_position, camera_position + (-camera.CFrame.RightVector * 150000) + Vector3.new(math.random(-3000, -1500), math.random(-50, 50), math.random(-50, 50)))
         elseif current_curve == "LeftSemiSharp" then
-            direction = CFrame.new(camera_position, camera_position + (-camera.CFrame.RightVector * 30000) + Vector3.new(math.random(-1000, -300), math.random(-150, 150), math.random(-150, 150)))
+            direction = CFrame.new(camera_position, camera_position + (-camera.CFrame.RightVector * 80000) + Vector3.new(math.random(-1500, -500), math.random(-50, 50), math.random(-50, 50)))
         elseif current_curve == "Up" then
-            direction = CFrame.new(camera_position, camera_position + (camera.CFrame.UpVector * 50000) + Vector3.new(math.random(-200, 200), math.random(500, 1500), math.random(-200, 200)))
+            direction = CFrame.new(camera_position, camera_position + (camera.CFrame.UpVector * 100000) + Vector3.new(math.random(-100, 100), math.random(1000, 2000), math.random(-100, 100)))
         elseif current_curve == "Down" then
-            direction = CFrame.new(camera_position, camera_position + (-camera.CFrame.UpVector * 50000) + Vector3.new(math.random(-200, 200), math.random(-1500, -500), math.random(-200, 200)))
+            direction = CFrame.new(camera_position, camera_position + (-camera.CFrame.UpVector * 100000) + Vector3.new(math.random(-100, 100), math.random(-2000, -1000), math.random(-100, 100)))
         elseif current_curve == "Normal" then
             direction = camera.CFrame
         elseif current_curve == "FollowCamera" then
-            direction = CFrame.new(LocalPlayer.Character.PrimaryPart.Position, camera_position + camera.CFrame.LookVector * 50000 + Vector3.new(math.random(-300, 300), math.random(-200, 200), math.random(-300, 300)))
+            direction = CFrame.new(LocalPlayer.Character.PrimaryPart.Position, camera_position + camera.CFrame.LookVector * 100000 + Vector3.new(math.random(-100, 100), math.random(-100, 100), math.random(-100, 100)))
         elseif current_curve == "Forward" then
-            direction = CFrame.new(LocalPlayer.Character.PrimaryPart.Position, LocalPlayer.Character.PrimaryPart.Position + LocalPlayer.Character.PrimaryPart.CFrame.LookVector * 50000 + Vector3.new(math.random(-200, 200), math.random(-200, 200), math.random(-200, 200)))
+            direction = CFrame.new(LocalPlayer.Character.PrimaryPart.Position, LocalPlayer.Character.PrimaryPart.Position + LocalPlayer.Character.PrimaryPart.CFrame.LookVector * 100000 + Vector3.new(math.random(-100, 100), math.random(-100, 100), math.random(-100, 100)))
         elseif current_curve == "Circular" then
             local angle = math.rad(math.random(0, 360))
-            local offset = Vector3.new(math.cos(angle) * 5000, math.sin(angle) * 2500, math.random(-2500, 2500))
+            local offset = Vector3.new(math.cos(angle) * 10000, math.sin(angle) * 5000, math.random(-5000, 5000))
             direction = CFrame.new(LocalPlayer.Character.PrimaryPart.Position, target_position + offset)
         end
     else
@@ -1378,7 +1376,7 @@ function AutoParry:PerformParry()
         end
     end 
         
-    task.delay(0.32, function()
+    task.delay(0.45, function()
         if ball_properties.parries > 0 then
             ball_properties.parries -= 1
         end
@@ -1736,7 +1734,8 @@ function AutoParry:is_spam()
     end
     
     local player_ping = Player.Entity.properties.ping or 0
-    local distance_threshold = 17 + (player_ping / 10)
+    local ping_factor = player_ping / 350
+    local distance_threshold = 17 + (player_ping / 6) + ping_factor * 20
 
     local ball_speed = ball_properties.speed or 1
     local reach_time = ball_properties.distance / ball_speed - player_ping
@@ -1758,13 +1757,25 @@ function AutoParry:is_spam()
         return false
     end
 
+  local is_curve = false
+    local is_high_curve = false
     if ball_properties.lerp_radians then       
-        local curve_threshold = 0.028 + (player_ping / 100) 
+        local curve_threshold = 0.028 + (player_ping / 70)
+        local dot_threshold = 0.4 - player_ping / 1000
+        local high_curve_dot_threshold = 0.15
         if ball_properties.lerp_radians > curve_threshold then
-            if self.parries >= 6 then
-                self.parries = 1
+            is_curve = true
+            if ball_properties.dot < high_curve_dot_threshold or (tick() - ball_properties.last_warping) < (reach_time / (1.1 / time_threshold_adjust)) then
+                is_high_curve = true
+                return false
+            elseif ball_properties.dot < dot_threshold then
+                if self.parries < 7 then
+                    return false
+                end
+                if self.parries >= 7 then
+                    self.parries = 1
+                end
             end
-            return false
         end
     end
 
@@ -1782,7 +1793,7 @@ function AutoParry:is_spam()
         return false
     end
 
-    if self.speed < 30 then
+    if self.speed < (45 + ping_factor) then
         self.parries = 1
         return false
     end
@@ -1792,35 +1803,35 @@ function AutoParry:is_spam()
         return false
     end
 
-    if self.entity_distance > self.range and self.entity_distance > distance_threshold then
+    if self.entity_distance > self.range and self.entity_distance > distance_threshold and (not is_curve or not is_high_curve and self.parries < 7) then
         if self.parries >= 4 then
             self.parries = 1
         end
         return false
     end
 
-    if self.ball_distance > self.range and self.entity_distance > distance_threshold then
+    if self.ball_distance > self.range and self.entity_distance > distance_threshold and (not is_curve or not is_high_curve and self.parries < 7) then
         if self.parries >= 4 then
             self.parries = 2
         end
         return false
     end
 
-    if self.last_position_distance > self.spam_accuracy and self.entity_distance > distance_threshold then
+    if self.last_position_distance > self.spam_accuracy and self.entity_distance > distance_threshold and (not is_curve or not is_high_curve and self.parries < 7) then
         if self.parries >= 5 then
             self.parries = 2
         end
         return false
     end
 
-    if self.ball_distance > self.spam_accuracy and self.ball_distance > distance_threshold then
+    if self.ball_distance > self.spam_accuracy and self.ball_distance > distance_threshold and (not is_curve or not is_high_curve and self.parries < 7) then
         if self.parries >= 5 then
             self.parries = 2
         end
         return false
     end
 
-    if self.entity_distance > self.spam_accuracy and self.entity_distance > (distance_threshold - math.pi) then
+    if self.entity_distance > self.spam_accuracy and self.entity_distance > (distance_threshold - math.pi) and (not is_curve or not is_high_curve and self.parries < 7) then
         if self.parries >= 5 then
             self.parries = 2
         end
@@ -1829,6 +1840,7 @@ function AutoParry:is_spam()
 
     return true
 end
+
 
 AutoParry.ball.training_ball_entity = AutoParry.Lobby_Balls()
 AutoParry.ball.ball_entity = AutoParry.get_ball()
@@ -2067,7 +2079,7 @@ ConnectionsManager['auto_spam'] = RunService.Heartbeat:Connect(function()
     end    
 
     local speeddo = getgenv().speeddo
-    for v = 2, speeddo do
+    for v = 1, speeddo do
         task.spawn(function() AutoParry:PerformParry() end)
     end
 end)
