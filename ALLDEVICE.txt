@@ -1376,7 +1376,7 @@ function AutoParry:PerformParry()
         end
     end 
         
-    task.delay(0.45, function()
+    task.delay(0.25, function()
         if ball_properties.parries > 0 then
             ball_properties.parries -= 1
         end
@@ -1852,7 +1852,7 @@ NetworkClient:SetOutgoingKBPSLimit(math.huge)
 local cached_ping = 0
 local last_ping_update = 0
 local function update_cached_ping()
-    if tick() - last_ping_update >= 0.5 then
+    if tick() - last_ping_update >= 0.1 then
         cached_ping = Stats.Network.ServerStatsItem["Data Ping"]:GetValue()
         last_ping_update = tick()
     end
@@ -1899,7 +1899,7 @@ local function setupConnections()
                 local character_position = character.PrimaryPart.Position
                 local direction_to_ball = (ball_position - character_position).Unit
                 local velocity_direction = player_properties.velocity.Unit        
-                if player_properties.speed > 30 and direction_to_ball:Dot(velocity_direction) < -0.1 then
+                if player_properties.speed > 16 and direction_to_ball:Dot(velocity_direction) < -0.1 then
                     player_properties.is_moving_backwards = true
                 end
             end
@@ -2167,13 +2167,13 @@ RunService.Heartbeat:Connect(function()
 
     local player_properties = Player.Entity.properties
     
-    -- Adjusted moveAmount with a lighter delta time scaling to prevent early parries
+    
     local baseMoveAmount = 0.5
     local moveAmount = baseMoveAmount * (1 / (AutoParry.entity_properties.distance + 0.01)) * 1000
 
-    -- Adjusted accuracy calculations with minimal delta time scaling
+    
     local spam_accuracity = math.min(moveAmount + (ball_properties.maximum_speed / 8.4), (150 + moveAmount))
-    local parry_accuracity = (ping_thresholds + ball_properties.maximum_speed) * 1.55 / 11.2 + ping_threshold
+    local parry_accuracity = (ping_thresholds + ball_properties.maximum_speed) * 1.55 / 11.4 + ping_threshold
 
     if player_properties.is_moving then
         parry_accuracity *= 1.1       
@@ -2187,7 +2187,7 @@ RunService.Heartbeat:Connect(function()
         parry_accuracity = parry_accuracity * (1 + (Player.Entity.properties.ping / 500))
     end
 
-    -- Adjusted ranges with lighter delta time scaling
+    
     ball_properties.spam_range = (ping_thresholds + ball_properties.speed) * 1.26 / 3.14    
     ball_properties.parry_range = (ping_threshold + ball_properties.speed) * 2 / math.pi
 
@@ -2312,7 +2312,7 @@ RunService.Heartbeat:Connect(function()
     lastPosition = LocalPlayer.Character.PrimaryPart.Position 
     ball_properties.last_ball_pos = ball_properties.position
 
-    task.spawn(function() AutoParry:PerformParry() end) 
+    AutoParry:PerformParry()
     
     task.spawn(function()
 		repeat
