@@ -1760,7 +1760,7 @@ function AutoParry:is_spam()
     local is_high_curve = false
     if ball_properties.lerp_radians then       
         local curve_threshold = 0.028 + (player_ping / 100)
-        local dot_threshold = 0.4 - player_ping
+        local dot_threshold = 0.2 - player_ping
         local high_curve_dot_threshold = 0.6
         if ball_properties.lerp_radians > curve_threshold then
             is_curve = true
@@ -1794,7 +1794,7 @@ function AutoParry:is_spam()
 		return false
 	end
 	
-	if self.speed < 45 then
+	if self.speed < 50 then
 		self.parries = 1
 
 		return false
@@ -1860,7 +1860,7 @@ NetworkClient:SetOutgoingKBPSLimit(math.huge)
 local cached_ping = 0
 local last_ping_update = 0
 local function update_cached_ping()
-    if tick() - last_ping_update >= 0.1 then
+    if tick() - last_ping_update >= 0.01 then
         cached_ping = Stats.Network.ServerStatsItem["Data Ping"]:GetValue()
         last_ping_update = tick()
     end
@@ -1899,7 +1899,7 @@ local function setupConnections()
             player_properties.ping = update_cached_ping()
             player_properties.velocity = character.PrimaryPart.AssemblyLinearVelocity
             player_properties.speed = player_properties.velocity.Magnitude
-            player_properties.is_moving = player_properties.speed > 30
+            player_properties.is_moving = player_properties.speed > 16
 
             player_properties.is_moving_backwards = false
             if AutoParry.ball and AutoParry.ball.properties and AutoParry.ball.properties.position then
@@ -1940,7 +1940,7 @@ local function setupConnections()
                 ball_properties.direction = (Player.Entity.properties.server_position - ball_properties.position).Unit
                 ball_properties.dot = ball_properties.direction:Dot(ball_properties.velocity.Unit)
                 ball_properties.radians = math.rad(math.asin(ball_properties.dot))
-                ball_properties.lerp_radians = ball_properties.lerp_radians and (ball_properties.lerp_radians * 0.2 + ball_properties.radians * 0.8) or ball_properties.radians
+                ball_properties.lerp_radians = ball_properties.lerp_radians and (ball_properties.lerp_radians * 0.3 + ball_properties.radians * 0.9) or ball_properties.radians
 
                 if not (ball_properties.lerp_radians < 0) and not (ball_properties.lerp_radians > 0) then
                     ball_properties.lerp_radians = 0.027
