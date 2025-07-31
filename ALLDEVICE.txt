@@ -1794,7 +1794,7 @@ function AutoParry:is_spam()
 		return false
 	end
 	
-	if self.speed < 65 then
+	if self.speed < 55 then
 		self.parries = 2
 
 		return false
@@ -2051,12 +2051,12 @@ function AutoAbility:performAutoAbility()
 
     
     local abilitiesToCheck = {
-        "Raging Deflection",
-        "Rapture",
-        "Calming Deflection",
-        "Aerodynamic Slash",
-        "Fracture",
-        "Death Slash"
+        "Raging Deflection ",
+        "Rapture ",
+        "Calming Deflection ",
+        "Aerodynamic Slash ",
+        "Fracture ",
+        "Death Slash "
     }
 
     local abilityActivated = false
@@ -2087,8 +2087,8 @@ ConnectionsManager['auto_spam'] = RunService.Heartbeat:Connect(function()
     end    
 
     local speeddo = getgenv().speeddo
-    for v = 1, speeddo do
-        task.spawn(function() AutoParry:PerformParry() end)
+    for v = 2, speeddo do
+        AutoParry:PerformParry()
     end
 end)
 
