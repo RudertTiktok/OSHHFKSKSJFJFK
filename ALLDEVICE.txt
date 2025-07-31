@@ -1794,8 +1794,8 @@ function AutoParry:is_spam()
 		return false
 	end
 	
-	if self.speed < 50 then
-		self.parries = 1
+	if self.speed < 65 then
+		self.parries = 2
 
 		return false
 	end
