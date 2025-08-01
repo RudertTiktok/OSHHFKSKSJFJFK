@@ -1761,7 +1761,7 @@ function AutoParry:is_spam()
     if ball_properties.lerp_radians then       
         local curve_threshold = 0.028 + (player_ping / 100)
         local dot_threshold = 0.2 - player_ping
-        local high_curve_dot_threshold = 0.6
+        local high_curve_dot_threshold = 0.4
         if ball_properties.lerp_radians > curve_threshold then
             is_curve = true
             if ball_properties.dot < high_curve_dot_threshold or (tick() - ball_properties.last_warping) < (reach_time / (1.1 / time_threshold_adjust)) then
@@ -1794,8 +1794,8 @@ function AutoParry:is_spam()
 		return false
 	end
 	
-	if self.speed < 55 then
-		self.parries = 2
+	if self.speed < 50 then
+		self.parries = 1
 
 		return false
 	end
