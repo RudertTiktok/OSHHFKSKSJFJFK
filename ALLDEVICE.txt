@@ -1376,7 +1376,7 @@ function AutoParry:PerformParry()
         end
     end 
         
-    task.delay(0.25, function()
+    task.delay(0.55, function()
         if ball_properties.parries > 0 then
             ball_properties.parries -= 1
         end
@@ -1915,8 +1915,8 @@ local function setupConnections()
 
         ConnectionsManager['ball_properties_update'] = RunService.PostSimulation:Connect(function()
             local balls = {}
-            local ball = AutoParry.get_ball()
-            local lobby_ball = AutoParry.Lobby_Balls()
+            local ball = AutoParry.ball.ball_entity
+            local lobby_ball = AutoParry.ball.training_ball_entity
             if ball then table.insert(balls, ball) end
             if lobby_ball then table.insert(balls, lobby_ball) end
 
@@ -2087,7 +2087,7 @@ ConnectionsManager['auto_spam'] = RunService.Heartbeat:Connect(function()
     end    
 
     local speeddo = getgenv().speeddo
-    for v = 2, speeddo do
+    for v = 1, speeddo do
         AutoParry:PerformParry()
     end
 end)
@@ -2326,7 +2326,7 @@ RunService.Heartbeat:Connect(function()
 		repeat
 			RunService.PreSimulation:Wait(0)
 		until 
-			(tick() - ball_properties.last_hit) > 1 - (ping_threshold / 100)
+			(tick() - ball_properties.last_hit) > 2 - (ping_threshold / 100)
 
 		ball_properties.cooldown = false
 	end)
@@ -8747,3 +8747,4 @@ task.delay(30, function()
         })
     end
 end)
+
